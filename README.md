@@ -74,6 +74,6 @@ You are free to use share and modify this project, only don't fail to make an at
 
 >Connect:
 
- - [[LinkedIn](https//:linkedin.com/ObulorN) ]
+ - [[LinkedIn](https://www.linkedin.com/in/obulornkweke/) ]
 
  - [[Email](obulor.nkweke@gmail.com)]
