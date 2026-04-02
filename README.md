@@ -70,10 +70,9 @@ You are free to use share and modify this project, only don't fail to make an at
  I am Obulor Nkweke a Data Analyst with passion to make data speak and with an exceptional interest in eCommerce data analytics.
  You can connect with me:
  
-  ![](/ObulorN_pix.png) 
+  ![](ObulorN_pix.png) 
 
 >Connect:
 
- - [[LinkedIn](https://www.linkedin.com/in/obulornkweke/) ]
+ [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/obulornkweke/) 
 
- - [[Email](obulor.nkweke@gmail.com)]
