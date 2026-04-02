@@ -1,0 +1,10 @@
+-- checking for duplicate
+select city_id,count(*), from tbl
+group by city_id
+having count(*)>1;
+
+-- checking for null
+select city_id from tbl where
+city_id is null;
+
+--  data standardization and consistency (no abbreviation like F=female; M=Male)

@@ -1,0 +1,13 @@
+select *,product_category_name_english from   silver_erp_olist_products_dataset
+join
+silver_erp_product_category_name_translation
+on
+silver_erp_olist_products_dataset.product_category_name = silver_erp_product_category_name_translation.product_category_name;
+
+
+select distinct count(product_category_name_english) from silver_erp_product_category_name_translation;
+
+SELECT silver_erp_olist_order_payments_dataset.order_id,price, payment_value FROM silver_erp_olist_order_items_dataset
+join silver_erp_olist_order_payments_dataset
+on silver_erp_olist_order_items_dataset.order_id=silver_erp_olist_order_payments_dataset.order_id
+group by silver_erp_olist_order_payments_dataset.order_id,price,payment_value;
