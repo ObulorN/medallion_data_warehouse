@@ -23,6 +23,10 @@ This is a portfolio data warehousing project with the under listed developmental
 
     - **Reports & Analytics** : Using sql to analize the data for insights and decision making and also making visualization with tools like Power Bi.
 
+  **Project Dataset:** 
+
+    [Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+
 - ### 🛠️ Skills: 
     - SQL
     - MySql
@@ -48,10 +52,13 @@ Medallion Data Warehouse Project:
 |       |__integration_model.drawio
 |       |__ data cataloq
 |       |__populate_customers_name.ipnb  # this a jupyter notebook file that was use to populate the customers with FAKE names
+|
+|____EDA/
+|      |__images
+|      |__scripts  # this folder contain eda scripts.
 |____Quality_Test/
-|       |_quality_checks_silver.sql # this script is for silver quality checks
-|       |_
-|       |_ 
+|       |_quality_checks_gold.sql # this script is for gold quality test
+|       |_quality_checks_silver.sql # this script is for silver quality test
 |
 |____Scripts/
 |       |_Bronze/ # this folder bronze scripts

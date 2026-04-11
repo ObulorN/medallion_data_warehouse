@@ -51,7 +51,13 @@ having count(*)>1;
 
  
 select *  from (
- select order_id,order_item_id,seller_id,shipping_limit_date,price,freight_value,row_number() over(partition by order_id order by(price) desc) as t_flag
+ select order_id,
+ order_item_id,
+ seller_id,
+ shipping_limit_date,
+ price,
+ freight_value,
+ row_number() over(partition by order_id order by(price) desc) as t_flag
 from bronze.bronze_erp_olist_order_items_dataset )t
 where t_flag=1; 
 
@@ -64,6 +70,38 @@ select * from bronze.bronze_erp_olist_order_items_dataset where seller_id is nul
 
 select * from bronze.bronze_erp_olist_order_items_dataset where shipping_limit_date is null;
 select * from bronze.bronze_erp_olist_order_items_dataset where price is null;
+
+
+/* =====================================================
+ test dim payments
+ 
+
+
+   ======================================================
+*/
+select order_id, count(*) from(
+SELECT
+order_id,
+sum(payment_value),
+count(*) as number_of_payments,
+max(payment_installments) as max_install
+from silver.silver_erp_olist_order_payments_dataset
+group by order_id)t
+group by order_id
+having count(*)>1;
+
+--
+SELECT order_id, count(*) 
+FROM
+	 (
+	SELECT fo.order_id, price,dp.payment_value
+	 FROM gold.fact_orders fo
+	 left join gold.dim_payment dp
+	 on fo.order_id= dp.order_id)t
+ GROUP BY order_id
+ HAVING  count(*)>1
+ ;
+
 
 
 

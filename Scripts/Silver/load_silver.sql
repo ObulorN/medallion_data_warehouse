@@ -85,7 +85,7 @@ FROM(
 		product_id, 
 		seller_id,
 		shipping_limit_date,
-		price,
+		price ,
 		freight_value,
 		 ROW_NUMBER() OVER(PARTITION BY order_id ORDER BY price DESC) AS rank_flag
 FROM
@@ -205,7 +205,7 @@ SELECT concat(TIMEDIFF(@end_time, @start_time) ," seconds olist_order_items_data
  product_id,
 product_category_name,
 product_name_lenght,
-product_description_lenght ,
+product_description_lenght,
 product_photos_qty, 
 product_weight_g, 
 product_length_cm,
@@ -219,22 +219,63 @@ SELECT
 product_category_name,
 product_name_lenght,
 product_description_lenght ,
-product_photos_qty, 
-product_weight_g, 
-product_length_cm,
-product_height_cm, 
-product_width_cm
- FROM bronze.bronze_erp_olist_products_dataset)
+product_photos_qty , 
+product_weight_g , 
+product_length_cm ,
+product_height_cm , 
+product_width_cm 
+FROM bronze.bronze_erp_olist_products_dataset)
 SELECT 
 product_id,
-UPPER(product_category_name),
-product_name_lenght,
-product_description_lenght ,
-product_photos_qty, 
-product_weight_g, 
-product_length_cm,
-product_height_cm, 
+CASE
+WHEN UPPER(product_category_name) ='' THEN 'n/a'
+ELSE
+product_category_name
+
+END,
+
+CASE
+WHEN product_name_lenght  ='' THEN 0
+ELSE
+product_name_lenght
+END,
+
+CASE
+WHEN product_description_lenght  ='' THEN 0
+ELSE
+product_description_lenght
+
+END,
+  CASE
+WHEN product_photos_qty ='' THEN 0
+ELSE
+product_photos_qty
+
+END,
+  CASE
+WHEN product_weight_g  ='' THEN 0
+
+ELSE
+product_weight_g
+END,
+  
+CASE
+WHEN UPPER(product_length_cm) ='' THEN 0
+ELSE
+product_length_cm
+END,
+CASE
+WHEN UPPER(product_height_cm) ='' THEN 0
+ELSE
+product_height_cm
+END,
+CASE
+WHEN UPPER(product_width_cm) ='' THEN 0
+ELSE
 product_width_cm
+
+END
+
 FROM cte_load_products;
 SET  @end_time=NOW();
 SELECT concat(TIMEDIFF(@end_time, @start_time) ," seconds olist_products_dataset load time ") ;

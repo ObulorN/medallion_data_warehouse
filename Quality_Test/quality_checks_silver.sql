@@ -1,6 +1,6 @@
 /*
 ===================================================================================================
-* This scripts cjecks  for data quality in the silver layer.alter
+* This scripts checks  for data quality in the silver layer.alter
 * It ensures data consistency,  standazation and completeness  across the records of the silver layer.
 *
 * Thid includes checks for:
@@ -36,6 +36,38 @@ WHERE customer_unique_id != TRIM(customer_unique_id);
 
 SELECT customer_city FROM silver_crm_olist_customers_dataset
 WHERE customer_city != TRIM(customer_city);
+/*============================================================
+-- check if all customers records are moved from bronze to silver
+-- Expected output : Nothing (it checks for unmatch record)
+
+==============================================================*/
+
+-- OPTION 1
+SELECT *  FROM bronze.bronze_crm_olist_customers_dataset b
+left join silver.silver_crm_olist_customers_dataset s
+on b.customer_id=s.customer_id
+where s.customer_id is null ;
+
+-- OPTION 2
+SELECT 
+customer_id , 
+customer_unique_id ,
+customer_zip_code_prefix ,
+customer_city , 
+customer_state  FROM bronze.bronze_crm_olist_customers_dataset
+
+EXCEPT
+
+SELECT 
+customer_id ,
+customer_unique_id , 
+customer_zip_code_prefix ,
+customer_city ,
+customer_state FROM silver.silver_crm_olist_customers_dataset;
+
+
+
+
 
 -- *********************************************************************
 -- Quality check for silver_erp_olist_geolocation_dataset
@@ -109,13 +141,24 @@ SELECT DISTINCT UPPER(product_category_name) FROM silver_erp_product_category_na
 
 SELECT DISTINCT UPPER(product_category_name_english) FROM silver_erp_product_category_name_translation;
 
-SELECT customer_unique_id, count(*) FROM bronze.bronze_crm_olist_customers_temp
+SELECT customer_unique_id, count(*) FROM silver.silver_crm_olist_customers_temp
 GROUP BY customer_unique_id
 HAVING COUNT(*)>1;
 
 -- failed test fix
 SELECT * FROM bronze.bronze_crm_olist_customers_temp
 WHERE customer_unique_id='b6c083700ca8c135ba9f0f132930d4e8';
+
+
+-- Gold Layer Test
+
+-- Test that there is no nagative profit
+-- Expected out: is Nothing
+
+use gold;
+SELECT order_id, profit, count(profit) FROM gold.fact_orders
+where profit <0
+group by order_id, profit;
 
 
 

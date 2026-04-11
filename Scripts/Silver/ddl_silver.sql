@@ -23,8 +23,7 @@ CREATE TABLE silver_erp_olist_order_payments_dataset(order_id VARCHAR(250),payme
 
 CREATE TABLE silver_erp_olist_orders_dataset(order_id VARCHAR(250),customer_id VARCHAR(250), order_status VARCHAR(100), order_purchase_timestamp TIMESTAMP, order_approved_at TIMESTAMP,order_delivered_carrier_date TIMESTAMP,order_delivered_customer_date TIMESTAMP, order_estimated_delivery_date TIMESTAMP,dwh_create_date DATETIME DEFAULT NOW());
 
-CREATE TABLE silver_erp_olist_products_dataset(product_id VARCHAR(250),product_category_name VARCHAR(255),product_name_lenght VARCHAR(255) ,product_description_lenght VARCHAR(255),product_photos_qty VARCHAR(255),product_weight_g VARCHAR(255),product_length_cm VARCHAR(255),product_height_cm VARCHAR(255),product_width_cm VARCHAR(255),dwh_create_date DATETIME DEFAULT NOW());
-
+CREATE TABLE silver_erp_olist_products_dataset(product_id VARCHAR(250),product_category_name VARCHAR(255),product_name_lenght INT ,product_description_lenght INT,product_photos_qty INT,product_weight_g INT,product_length_cm INT,product_height_cm INT,product_width_cm INT,dwh_create_date DATETIME DEFAULT NOW());
 
 CREATE TABLE silver_erp_olist_sellers_dataset(seller_id VARCHAR(250),seller_zip_code_prefix VARCHAR(50),seller_city VARCHAR(100),seller_state VARCHAR(50),dwh_create_date DATETIME DEFAULT NOW());
 
