@@ -23,7 +23,6 @@ CREATE TABLE bronze_erp_olist_order_payments_dataset(order_id VARCHAR(250),payme
 
 CREATE TABLE bronze_erp_olist_orders_dataset(order_id VARCHAR(250),customer_id VARCHAR(250), order_status VARCHAR(100), order_purchase_timestamp VARCHAR(100), order_approved_at VARCHAR(100),order_delivered_carrier_date VARCHAR(100),order_delivered_customer_date VARCHAR(100), order_estimated_delivery_date VARCHAR(100));
 
-
 CREATE TABLE bronze_erp_olist_products_dataset(product_id VARCHAR(250),product_category_name VARCHAR(255),product_name_lenght VARCHAR(255) ,product_description_lenght VARCHAR(255),product_photos_qty VARCHAR(255),product_weight_g VARCHAR(255),product_length_cm VARCHAR(255),product_height_cm VARCHAR(255),product_width_cm VARCHAR(255));
 
 
@@ -32,3 +31,5 @@ CREATE TABLE bronze_erp_olist_sellers_dataset(seller_id VARCHAR(250),seller_zip_
 CREATE TABLE bronze_erp_product_category_name_translation(product_category_name VARCHAR(255),product_category_name_english VARCHAR(255));
 
 CREATE TABLE bronze_crm_olist_customers_temp(customer_unique_id VARCHAR(255),customer_name_surrogate VARCHAR(200));
+
+CREATE TABLE bronze_erp_olist_order_reviews_dataset(review_id VARCHAR(250), order_id VARCHAR(250), review_score VARCHAR(10),review_comment_title VARCHAR(255),review_message VARCHAR(5000), review_creation_date VARCHAR(150),review_answer_timestamp VARCHAR(150));

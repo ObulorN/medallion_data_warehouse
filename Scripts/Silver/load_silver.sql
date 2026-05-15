@@ -363,4 +363,34 @@ customer_name_surrogate
 FROM bronze.bronze_crm_olist_customers_temp)
 SELECT customer_unique_id,
 customer_name_surrogate FROM cte_load_customers_temp;
+
+/*
+----------------------------------------------
+ Loading silver_crm_olist_order_reviews_dataset
+ ---------------------------------------------
+ */
+ SET  @start_time=NOW();
+ -- truncate before full load
+ TRUNCATE silver_erp_olist_order_reviews_dataset;
+ INSERT INTO silver_erp_olist_order_reviews_dataset(
+review_id ,
+order_id ,
+review_score ,
+review_comment_title,
+review_message ,
+review_creation_date ,
+review_answer_timestamp
+)
+SELECT 
+review_id ,
+order_id ,
+review_score ,
+review_comment_title,
+review_message ,
+ str_to_date( review_creation_date,'%m/%d/%Y %H:%i' ) ,
+str_to_date(review_answer_timestamp,'%m/%d/%Y %H:%i')
+FROM bronze.bronze_erp_olist_order_reviews_dataset
+;
+
+
  

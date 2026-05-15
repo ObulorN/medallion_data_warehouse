@@ -119,5 +119,12 @@ FROM silver.silver_erp_olist_order_payments_dataset
 group by order_id
 );
 
+DROP VIEW IF EXISTS gold.dim_review;
+CREATE VIEW gold.dim_review AS
+(SELECT review_id,order_id,review_score
+FROM silver.silver_erp_olist_order_reviews_dataset
+)
+;
+
 
 

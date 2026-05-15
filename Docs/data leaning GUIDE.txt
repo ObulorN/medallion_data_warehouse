@@ -8,3 +8,13 @@ select city_id from tbl where
 city_id is null;
 
 --  data standardization and consistency (no abbreviation like F=female; M=Male)
+
+-- Error Code: 1262. Row 77917 was truncated; it contained more data than there were input columns
+Opening and resaving the csv file using utf-8 csv formate and also terminating like this (LINES TERMINATED BY '\r\n') solved this error.
+
+-- Error Code: 1292. Incorrect datetime value: '1/18/2018 0:00' for column 'review_creation_date' at row 1
+
+use str_to_date function to fix it like so: str_to_date( review_creation_date,'%m/%d/%Y %H:%i' )
+
+--Error Code: 1265. Data truncated for column 'review_message' at row 20913
+   fix this by increasing ddl data type capacity eg from varchar(250) to varchar(5000);

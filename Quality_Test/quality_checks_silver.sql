@@ -67,8 +67,6 @@ customer_state FROM silver.silver_crm_olist_customers_dataset;
 
 
 
-
-
 -- *********************************************************************
 -- Quality check for silver_erp_olist_geolocation_dataset
 -- ********************************************************************
@@ -160,5 +158,17 @@ SELECT order_id, profit, count(profit) FROM gold.fact_orders
 where profit <0
 group by order_id, profit;
 
+-- test that there is no duplicate key review_id
+-- Expected out: is Nothing
+select review_id, order_id, review_score,count(*) as count FROM silver.silver_erp_olist_order_reviews_dataset 
+group by review_id,order_id, review_score
+having count(*)>1
+;
 
+-- test that there is no duplicate key order_id in order_items_dataset
+-- Expected out: is Nothing
 
+SELECT order_id, count(*) as count FROM silver.silver_erp_olist_order_items_dataset
+group by order_id
+having count(*) >1
+;

@@ -30,3 +30,4 @@ CREATE TABLE silver_erp_olist_sellers_dataset(seller_id VARCHAR(250),seller_zip_
 CREATE TABLE silver_erp_product_category_name_translation(product_category_name VARCHAR(255),product_category_name_english VARCHAR(255),dwh_create_date DATETIME DEFAULT NOW());
 
 CREATE TABLE silver_crm_olist_customers_temp(customer_unique_id VARCHAR(255),customer_name_surrogate VARCHAR(200));
+CREATE TABLE silver_erp_olist_order_reviews_dataset(review_id VARCHAR(250), order_id VARCHAR(250), review_score INT,review_comment_title VARCHAR(200),review_message VARCHAR(5000), review_creation_date TIMESTAMP,review_answer_timestamp TIMESTAMP,dwh_create_date DATETIME DEFAULT NOW());

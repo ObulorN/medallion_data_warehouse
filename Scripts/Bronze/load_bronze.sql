@@ -177,11 +177,30 @@ LOAD DATA INFILE 'D:/GitPrj/medallion_data_warehouse/DataSource/crm/olist_custom
 INTO TABLE  bronze_crm_olist_customers_temp 
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
+LINES TERMINATED BY '\r'
 IGNORE 1 ROWS;
 SET  @end_time=NOW();
 SELECT concat(TIMEDIFF(@end_time, @start_time) ," seconds bronze_crm_olist_customers_temp  load time ") ;
 
+
+/*
+==============================================
+Loading bronze_erp_olist_order_reviews_dataset 
+==============================================
+*/
+# truncate table 
+SELECT ">> truncating table...";
+TRUNCATE TABLE bronze_erp_olist_order_reviews_dataset ; 
+SELECT ">> truncating done...";
+SELECT ">> loading data to table...";
+LOAD DATA INFILE 'D:/GitPrj/medallion_data_warehouse/DataSource/erp/olist_order_reviews_dataset.csv'
+INTO TABLE  bronze_erp_olist_order_reviews_dataset
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+SET  @end_time=NOW();
+SELECT concat(TIMEDIFF(@end_time, @start_time) ," seconds bronze_erp_olist_order_reviews_dataset  load time ") ;
 
 
 
