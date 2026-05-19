@@ -62,7 +62,7 @@ sum(profit) OVER(PARTITION BY customer_id ORDER BY profit ASC) AS profit,
 ON 
  f.customer_id=c.customer_id)
  
- SELECT customer_name_surrogate,round(profit,2) AS least_customers
+ SELECT customer_name_surrogate,round(profit,2) AS five_least_profit
  FROM least_five_customers
  ORDER BY rn ASC
  LIMIT 5
@@ -186,14 +186,19 @@ FROM
      order by order_date desc   
 ;
  -- what is the profit month on month?
-  SELECT MONTH(order_purchase_timestamp)AS OrderMONTH, 
- round(sum(profit),2) AS current_profit,
- round( Lag(sum(profit)) OVER(ORDER BY MONTH(order_purchase_timestamp)),2) AS lag_profit,
- round(sum(profit) - Lag(sum(profit)) OVER(ORDER BY MONTH(order_purchase_timestamp)),2)  AS profit_differnce
-  FROM
-  gold.fact_orders
-  GROUP BY
-  MONTH(order_purchase_timestamp)
+ 
+ 
+ select orderMonth,sum(current_profit) as prof,sum(lag_profit) as lag_prof, sum(profit_difference) as profit_diff
+ from
+	  (SELECT MONTH(order_purchase_timestamp)AS OrderMONTH, 
+	 round(sum(profit),2) AS current_profit,
+	 round( Lag(sum(profit)) OVER(   ORDER BY MONTH(order_purchase_timestamp)),2) AS lag_profit,
+	 round(sum(profit) - Lag(sum(profit)) OVER(     ORDER BY MONTH(order_purchase_timestamp)),2)  AS profit_difference
+	  FROM
+	  gold.fact_orders
+	  GROUP BY
+	  MONTH(order_purchase_timestamp),order_purchase_timestamp)t
+  group by orderMonth
     ;
     
     -- find the next transaction profit per customer
@@ -215,7 +220,7 @@ GROUP BY order_id
 HAVING COUNT(DISTINCT MONTH(order_purchase_timestamp))  > 1;
       
     
---
+
     
 -- calculate day difference between consecutive orders
 
@@ -228,7 +233,7 @@ FROM(
 
 /*
 ================================================================================
-= MADNITUDE analysis										                   =
+= MAGNITUDE analysis										                   =
 =																		       =
 =================================================================================
 */
@@ -263,8 +268,8 @@ ON
       
 SELECT product_category_name,ROUND(total_profit,2)
 FROM least_category
- ORDER BY total_profit ASc 
- LIMIT 10
+ORDER BY total_profit ASc 
+LIMIT 10
   ;
   
  
@@ -289,7 +294,7 @@ datediff(order_estimated_delivery_date,order_purchase_timestamp) AS estimated_da
 
 FROM fact_orders)t;
 
- -- FF
+ -- get a list of orders whose purchase date to customer delivery date is greater than 30 days
  SELECT 
 order_id,
 order_purchase_timestamp,
@@ -299,14 +304,32 @@ FROM fact_orders
  GROUP BY order_id,order_delivered_customer_date,order_purchase_timestamp
  Having
  datediff(order_delivered_customer_date,order_purchase_timestamp)>30
-
  ;
  
+  -- get a list of most recent customers : recency.
+  SELECT customer_name_surrogate, order_id,recency_in_days
+  from(
+	 SELECT 
+	order_id,
+    o.customer_id,
+    customer_name_surrogate,
+	order_purchase_timestamp,
+	datediff(now(),max(order_purchase_timestamp)) AS recency_in_days
+	FROM fact_orders o 
+    LEFT JOIN dim_customers c 
+    ON
+    o.customer_id=c.customer_id
+    
+    GROUP BY order_id,order_purchase_timestamp,o.customer_id,customer_name_surrogate
+    )t
+ GROUP BY order_id,recency_in_days,customer_name_surrogate
+ ORDER BY recency_in_days 
+ ;
  
  
 /*
 ================================================================================
-= Location	Analysis									                       =
+= Geo Location	Analysis									                       =
 =	This section focuses on analysing the dataset for location insight.        =
 =================================================================================
 */
@@ -332,7 +355,7 @@ SELECT f.customer_id, customer_city,
   
  ;
 
- -- What is the best ten selling state?
+ -- What is the  ten best selling state?
  SELECT distinct customer_state, ROUND(sum(profit),2) AS total_profit
  FROM fact_orders o 
  LEFT JOIN  dim_customers c 
