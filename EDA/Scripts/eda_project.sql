@@ -188,11 +188,11 @@ FROM
  -- what is the profit month on month?
  
  
- select orderMonth,sum(current_profit) as prof,sum(lag_profit) as lag_prof, sum(profit_difference) as profit_diff
+ select orderMonth,ROUND(sum(current_profit),2) as profit,ROUND(sum(lag_profit),2) as lag_profit, ROUND(sum(profit_difference),2) as profit_diff
  from
 	  (SELECT MONTH(order_purchase_timestamp)AS OrderMONTH, 
 	 round(sum(profit),2) AS current_profit,
-	 round( Lag(sum(profit)) OVER(   ORDER BY MONTH(order_purchase_timestamp)),2) AS lag_profit,
+	 round( Lag(sum(profit)) OVER(ORDER BY MONTH(order_purchase_timestamp)),2) AS lag_profit,
 	 round(sum(profit) - Lag(sum(profit)) OVER(     ORDER BY MONTH(order_purchase_timestamp)),2)  AS profit_difference
 	  FROM
 	  gold.fact_orders
@@ -224,7 +224,7 @@ HAVING COUNT(DISTINCT MONTH(order_purchase_timestamp))  > 1;
     
 -- calculate day difference between consecutive orders
 
-SELECT current_day,next_day, datediff(next_day,current_day)
+SELECT current_day,next_day, datediff(next_day,current_day) as days_before_next_order
 FROM(
 	SELECT order_purchase_timestamp AS current_day,
 	LEAD(order_purchase_timestamp) OVER(ORDER BY order_purchase_timestamp) AS next_day
@@ -279,7 +279,17 @@ LIMIT 10
 =	This section focuses on analysing the dataset for location insight.        =
 =================================================================================
 */
--- whats the min/max/ average purchase to customer delivare value and 
+-- profit by year (YOY)
+SELECT ROUND(sum(profit)) as profit_yearly,
+ROUND(LAG(sum(profit)) over(order by Year(order_purchase_timestamp) ),2)  as yr_diff,
+Year(order_purchase_timestamp) as year
+From fact_orders
+GROUP BY year
+
+;
+
+
+-- whats the min/max/ average purchase to customer delivare value 
 
   USE gold;
  select  min(customer_days) as min_customer_delivery  ,max(customer_days) as max_customer_delivery,ROUND(avg(customer_days),2) as avg_customer_delivery
@@ -299,7 +309,7 @@ FROM fact_orders)t;
 order_id,
 order_purchase_timestamp,
 order_delivered_customer_date,
-datediff(order_delivered_customer_date,order_purchase_timestamp) AS customer_days
+datediff(order_delivered_customer_date,order_purchase_timestamp) AS delivery_above_30days
 FROM fact_orders
  GROUP BY order_id,order_delivered_customer_date,order_purchase_timestamp
  Having
@@ -307,7 +317,7 @@ FROM fact_orders
  ;
  
   -- get a list of most recent customers : recency.
-  SELECT customer_name_surrogate, order_id,recency_in_days
+  SELECT customer_name_surrogate,recency_in_days
   from(
 	 SELECT 
 	order_id,
@@ -322,7 +332,7 @@ FROM fact_orders
     
     GROUP BY order_id,order_purchase_timestamp,o.customer_id,customer_name_surrogate
     )t
- GROUP BY order_id,recency_in_days,customer_name_surrogate
+ GROUP BY recency_in_days,customer_name_surrogate
  ORDER BY recency_in_days 
  ;
  

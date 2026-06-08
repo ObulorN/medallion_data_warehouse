@@ -172,3 +172,19 @@ SELECT order_id, count(*) as count FROM silver.silver_erp_olist_order_items_data
 group by order_id
 having count(*) >1
 ;
+
+------- temp_view
+
+use gold;
+DROP VIEW IF EXISTS vw_product_score;
+CREATE VIEW vw_product_score AS (
+ SELECT p.product_id,sum(s.review_score) as total_score,product_category_name
+ FROM silver.silver_erp_olist_order_reviews_dataset s 
+ LEFT JOIN silver.silver_erp_olist_order_items_dataset i  
+ ON s.order_id=i.order_id
+ LEFT JOIN  silver.silver_erp_olist_products_dataset p
+ ON i.product_id=p.product_id
+ GROUP BY  p.product_id, p.product_category_name
+ HAVING  p.product_id IS NOT Null
+ ORDER BY total_score DESC);
+

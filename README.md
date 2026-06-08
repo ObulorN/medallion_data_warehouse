@@ -3,13 +3,13 @@
 
 >### Project Overview:
 This is an end-to-end data analytic project consisting of three parts. 
-- The first part will involve the design and implementation of data warehouse using the medallion architecture.
+- The first part  involves the design and implementation of data warehouse using the medallion architecture.
 - While in the second part we  get our hands dirty using sql to do an eda, using dataset from the warehouse.
 - And finally we shall visualize the dataset using Power Bi where we shall do some further analysis.
 
-## 🧱 Part 1.
+## 🧱 Part 1: Medallion Data Warehouse.
 "A data warehouse is a subject-oriented, integrated, time-variant and non-volatile collection of data in support of management decision
-making process".
+making process". 
 In this section will be building a data warehouse using MySql dialect.
 
 **Project Dataset:** 
@@ -40,17 +40,17 @@ Medallion Data Warehouse Project:
 |       |_quality_checks_silver.sql # this script is for silver quality test
 |
 |____Scripts/
-|       |_Bronze/ # this folder bronze scripts
-|       |_Silver/ # this folder silver scripts
-|       |_Gold/   # this folder gold scripts
+|       |_Bronze/ # this folder contain bronze scripts
+|       |_Silver/ # this folder contain silver scripts
+|       |_Gold/   # this folder contain gold scripts
 |____Visualisation/
 |       |_ olist_data_analysis.pbix
 |____ReadMe.md
 
 ```
 
-- 🎯 Objective:
-This is a portfolio data warehousing project with the under listed developmental goals:
+- 🎯Part 1 Objectives:
+
     - **Data Architecture**: Design and implementation of data warehouse using the medellion architecture: **Bronze, Silver, Gold layers**.
 
     ![](Docs/data_architecture.jpg)
@@ -81,7 +81,7 @@ This is a portfolio data warehousing project with the under listed developmental
 
 
 
-## ⛓️ Part 2.
+## ⛓️ Part 2: EDA with SQL
 - EDA with SQL: SQL stands for structural query languge which is the language used in communicating with most relational database system.
 We shall be using sql to analize the dataset under the following subgroups:
 - Dimension Analysis:
@@ -92,15 +92,39 @@ We shall be using sql to analize the dataset under the following subgroups:
 - Time Intelligence Analysis:
 - Geo Location Analysis:
 
-The full eda analysis can be found in the eda_projet sql file [here](./EDA/Scripts/eda_project.sql)
+Some of the **Insights** from the sql eda is highlighted below:
+- Profit measures: 
+![](EDA/Images/measures_profit.png)
+
+- Total Customer Count: ![](EDA/Images/total_customer_count.png)
+
+- Most Recent Customers : ![](EDA/Images/customer_recency.png)
+
+- Total catalog value: ![](EDA/Images/total_catalog_value.png)
 
 
-## 📶 Part 3.
 
-```
+- Most Profitable Category: ![](EDA/Images/product_category.png)
 
 
-```
+
+
+- Top Rank Cities: ![](EDA/Images/top_rank_city.png)
+- Order Delivery Measures: ![](EDA/Images/purchase_to_order_deliver.png)
+
+- MoM Profit: ![Dashboard](EDA/Images/mom_profit.png)
+
+- YoY Profit: ![Dashboard](EDA/Images/yoy_profit.png)
+
+Meanwhile the full eda analysis script can be found in the eda_projet sql file [here](./EDA/Scripts/eda_project.sql)
+
+
+## 📶 Part 3: Visualization with Power Bi
+
+
+![](/visualization/dashboard.png)
+
+
 
 ## 📝 Conclusion:
 
