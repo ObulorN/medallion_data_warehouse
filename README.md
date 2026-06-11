@@ -96,6 +96,10 @@ Some of the **Insights** from the sql eda is highlighted below:
 - Profit measures: 
 ![](EDA/Images/measures_profit.png)
 
+- Part to Whole: 
+![](EDA/Images/part_to_whole.png)
+
+
 - Total Customer Count: ![](EDA/Images/total_customer_count.png)
 
 - Most Recent Customers : ![](EDA/Images/customer_recency.png)
@@ -120,19 +124,64 @@ Meanwhile the full eda analysis script can be found in the eda_projet sql file [
 
 
 ## 📶 Part 3: Visualization with Power Bi
+Below are some visuals from the Power Bi projects and some insights there in:
+
+- Time Intelligence Analysis:
+![](/visualization/time_intelligence.png)
+  - **Insights:**
+     - Profit have continious upward trend over the years.
+     - Monday got the most profit while Saturday had the least.
+     - Total orders also had continious upward trend over the years.
+     - July got the most profit while Sept had the least.
 
 
+-  Profit Part to Whole Analysis:
+![](/visualization/part_to_whole_profit.png)
+   - **Insights:**
+      - Cama mesa bhanho category had the most profit percentage of 10%.
+      - Sugaros-e-servicos had the least percent profit.
+
+- Magnitude Analysis:
+![](/visualization/magnitude_analysis.png)
+ - **Insights:**
+      - SP state had both the most profit and number of orders .
+      - Sao Paolo city got us the highest number of customers while Colorado, Itaqui etc got least of the customers .
+      - SC state had about 1K orders greater than that of BA state, but BA made more profit compared to SC.
+
+
+- Cumulative Analysis:
+![](/visualization/cumulative_analysis.png)
+  - **Insights:**
+      - Most customers paid with Credit card amounting to a total value of R12.54M.
+      - Belato came second with R2.87M .
+
+- Measures Analysis:
+![](/visualization/measures_analysis.png)
+
+- GeoLocation Analysis:
+![](/visualization/geolocation.png)
+
+
+- Dashboard
 ![](/visualization/dashboard.png)
 
 
 
-## 📝 Conclusion:
+## 📝 Recommedantion:
+   - Weekend (saturday/sunday) and month of september had the least profit therefor running campaigns and promo in these days and month will be recommended.
+
+   - Cities of Colorado, Itaqui etc, got us the least customers, so investigating product category prefered by customers of these cities and also restock along such product line will be recomended.
+
+   -To attract new customers and also extend reach;  advertising through  multiple channels will be recommended.
+
+   ## 📝 Conclusion:
+   Many thanks for spending your time on my projects; i hope you find this useful, feel free to reach me through the channels below.
 
 >### License:
 You are free to use share and modify this project, only don't fail to make an attribution; the project is license under the MIT licence.
 
 >### About Me:
- I am Obulor Nkweke a Data Analyst with passion to make data speak and with an exceptional interest in eCommerce data analytics.
+My name is Obulor Nkweke a Data Analyst with passion to make data speak. I also have  an exceptional interest in eCommerce data analytics.
  You can connect with me:
  
   ![](ObulorN_pix.png) 

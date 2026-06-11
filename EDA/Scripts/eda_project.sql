@@ -84,8 +84,9 @@ FROM cust_with_increase_purchase
 ORDER BY total_profit DESC;
 
  -- get a unique list of product category?
+ USE gold;
 SELECT DISTINCT product_category_name 
-FROM dim_productS
+FROM dim_products
 ORDER BY product_category_name
 ;
 
