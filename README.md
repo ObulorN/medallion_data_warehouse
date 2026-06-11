@@ -7,6 +7,9 @@ This is an end-to-end data analytic project consisting of three parts.
 - While in the second part we  get our hands dirty using sql to do an eda, using dataset from the warehouse.
 - And finally we shall visualize the dataset using Power Bi where we shall do some further analysis.
 
+## Project Github: 
+The entire project can be found here:  [github]("https://github.com/ObulorN/medallion_data_warehouse")
+
 ## 🧱 Part 1: Medallion Data Warehouse.
 "A data warehouse is a subject-oriented, integrated, time-variant and non-volatile collection of data in support of management decision
 making process". 
@@ -189,4 +192,11 @@ My name is Obulor Nkweke a Data Analyst with passion to make data speak. I also 
 >Connect:
 
  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/obulornkweke/) 
+ 
 
+ ##### Resources:
+ [**Data With Baraa:**]( https://www.youtube.com/watch?v=9GVqKuTVANE&list=PLNcg_FV9n7qaUWeyUkPfiVtMbKlrfMqA8)
+
+
+[**Luck Barousse:**](
+ https://www.youtube.com/watch?v=FwjaHCVNBWA&t=60s)
