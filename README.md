@@ -3,16 +3,15 @@
 
 >### Project Overview:
 This is an end-to-end data analytic project consisting of three parts. 
-- The first part  involves the design and implementation of data warehouse using the medallion architecture.
-- While in the second part we  get our hands dirty using sql to do an eda, using dataset from the warehouse.
-- And finally we shall visualize the dataset using Power Bi where we shall do some further analysis.
+- The first part  involves the design and implementation of data warehouse using the medallion architecture (Bronze, Silver, Gold) using MySql.
+- While in the second part we  got our hands dirty using sql to do an eda, using dataset from the warehouse.
+- And finally we visualize the dataset using Power Bi where we did some further analysis.
 
 ## Project Github: 
 The entire project can be found here:  [github]("https://github.com/ObulorN/medallion_data_warehouse")
 
 ## 🧱 Part 1: Medallion Data Warehouse.
-"A data warehouse is a subject-oriented, integrated, time-variant and non-volatile collection of data in support of management decision
-making process". 
+"A data warehouse is a subject-oriented, integrated, time-variant and non-volatile collection of data in support of management decision making process". 
 In this section will be building a data warehouse using MySql dialect.
 
 **Project Dataset:** 
@@ -63,7 +62,7 @@ Medallion Data Warehouse Project:
     ![](Docs/data_flow.jpg)
 
     - **Data Modelling** :
-    This involves the identification of relatiionship in tables and the development of fact and dimension tables/views basicaly in the gold the  layer according to design specification.
+    This involves the identification of relationship in tables and the development of fact and dimension tables/views basicaly in the gold layer according to design specification.
 
     ![](Docs/integration_model.jpg)
 
